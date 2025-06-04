@@ -1,0 +1,349 @@
+#VRML_SIM R2025a utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/floors/protos/RectangleArena.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/appearances/protos/Pcb.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/appearances/protos/Rubber.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/appearances/protos/BrushedAluminium.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/appearances/protos/Copper.proto"
+
+WorldInfo {
+}
+Viewpoint {
+  orientation -0.16021844467629864 0.8366761635002484 0.5237394843011294 0.7010635002159694
+  position -1.3274073396568442 -0.9732778294054095 0.8492057629127735
+  follow "Z33ker 3.0"
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+RectangleArena {
+  floorSize 2 2
+  floorAppearance PBRAppearance {
+    roughness 1
+    roughnessMap ImageTexture {
+      url [
+        "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/appearances/protos/textures/parquetry/mosaic_parquetry_roughness.jpg"
+      ]
+    }
+    metalness 0
+    normalMap ImageTexture {
+      url [
+        "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/appearances/protos/textures/parquetry/mosaic_parquetry_normal.jpg"
+      ]
+    }
+    occlusionMap ImageTexture {
+      url [
+        "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/appearances/protos/textures/parquetry/mosaic_parquetry_occlusion.jpg"
+      ]
+    }
+  }
+}
+Solid {
+  translation -0.356546 -0.527723 0
+  rotation 0 0 1 2.8797896938995744
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 1 0 0
+        roughness 1
+        metalness 0
+      }
+      geometry Box {
+        size 0.03 0.51 0.0005
+      }
+    }
+  ]
+  name "RedLine"
+  locked TRUE
+}
+Solid {
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0 0 0
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../path/outer_path.obj"
+        ]
+      }
+    }
+  ]
+  name "OuterWall"
+  boundingObject Mesh {
+    url [
+      "../path/outer_path.obj"
+    ]
+  }
+  locked TRUE
+}
+Solid {
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0 0 0
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../path/inner_path.obj"
+        ]
+      }
+    }
+  ]
+  name "InnerWall"
+  boundingObject Mesh {
+    url [
+      "../path/inner_path.obj"
+    ]
+  }
+  locked TRUE
+}
+Robot {
+  translation -0.402938 -0.484758 0.02
+  rotation 0 0 -1 0.261806
+  children [
+    InertialUnit {
+      translation 0 0 0.02
+      children [
+        DEF imuUnit Shape {
+          geometry Box {
+            size 0.01 0.01 0.01
+          }
+        }
+      ]
+      name "imu"
+      boundingObject USE imuUnit
+      physics Physics {
+      }
+    }
+    DistanceSensor {
+      translation 0.05 0 0
+      children [
+        Shape {
+          appearance Copper {
+          }
+          geometry Box {
+            size 0.005 0.005 0.005
+          }
+        }
+      ]
+      name "senF"
+      lookupTable [
+        0 1024 0
+        0.3 0 0
+      ]
+    }
+    DistanceSensor {
+      translation 0.045 -0.02 0
+      rotation 0 0 1 -0.5236
+      children [
+        Shape {
+          appearance Copper {
+          }
+          geometry Box {
+            size 0.005 0.005 0.005
+          }
+        }
+      ]
+      name "senR1"
+      lookupTable [
+        0 1024 0
+        0.3 0 0
+      ]
+    }
+    DistanceSensor {
+      translation 0.045 0.02 0
+      rotation 0 0 1 0.5236
+      children [
+        Shape {
+          appearance Copper {
+          }
+          geometry Box {
+            size 0.005 0.005 0.005
+          }
+        }
+      ]
+      name "senL1"
+      lookupTable [
+        0 1024 0
+        0.3 0 0
+      ]
+    }
+    DistanceSensor {
+      translation 0.032 -0.037 0
+      rotation 0 0 1 -1.0472003061004251
+      children [
+        Shape {
+          appearance Copper {
+          }
+          geometry Box {
+            size 0.005 0.005 0.005
+          }
+        }
+      ]
+      name "senR2"
+      lookupTable [
+        0 1024 0
+        0.3 0 0
+      ]
+    }
+    DistanceSensor {
+      translation 0.032 0.037 0
+      rotation 0 0 1 1.0471996938995747
+      children [
+        Shape {
+          appearance Copper {
+          }
+          geometry Box {
+            size 0.005 0.005 0.005
+          }
+        }
+      ]
+      name "senL2"
+      lookupTable [
+        0 1024 0
+        0.3 0 0
+      ]
+    }
+    Solid {
+      translation -0.03 0 -0.01
+      children [
+        DEF stub Shape {
+          geometry Capsule {
+            height 0.01
+            radius 0.005
+          }
+        }
+      ]
+      name "stub"
+      boundingObject USE stub
+      physics Physics {
+      }
+    }
+    Solid {
+      translation 0.03 0 -0.01
+      children [
+        DEF stub Shape {
+          geometry Capsule {
+            height 0.01
+            radius 0.005
+          }
+        }
+      ]
+      name "stubF"
+      boundingObject USE stub
+      physics Physics {
+      }
+    }
+    HingeJoint {
+      endPoint Solid {
+        translation 0.0422354 0 0.0110224
+        rotation 0 1 0 1.8326
+        children [
+          Camera {
+            rotation 0 1 0 -1.5707953071795862
+            name "cam"
+            fieldOfView 1
+            width 320
+            height 240
+          }
+          Shape {
+            appearance BrushedAluminium {
+            }
+            geometry Cylinder {
+              height 0.005
+              radius 0.005
+            }
+          }
+        ]
+        name "cameraMount"
+      }
+    }
+    DEF body Shape {
+      appearance Pcb {
+      }
+      geometry Cylinder {
+        height 0.03
+        radius 0.05
+      }
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        axis 0 1 0
+        anchor 0 0.055 0
+      }
+      device [
+        PositionSensor {
+          name "enL"
+        }
+        RotationalMotor {
+          name "motorL"
+          maxVelocity 20
+        }
+      ]
+      endPoint Solid {
+        translation 3.2370410406523216e-11 0.035000000089609296 1.1060852353792605e-06
+        rotation 1 -9.984301071433942e-09 9.984981430611162e-09 1.5707996704397007
+        children [
+          DEF wheelL Shape {
+            appearance Rubber {
+            }
+            geometry Cylinder {
+              height 0.01
+              radius 0.02
+            }
+          }
+        ]
+        name "wheelL"
+        boundingObject USE wheelL
+        physics DEF wheelPhysics Physics {
+        }
+      }
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        axis 0 1 0
+        anchor 0 -0.055 0
+      }
+      device [
+        PositionSensor {
+          name "enR"
+        }
+        RotationalMotor {
+          name "motorR"
+          maxVelocity 20
+        }
+      ]
+      endPoint Solid {
+        translation 3.2315928556176934e-11 -0.035000000084952826 1.240629998196314e-06
+        rotation 1 -9.977933769845988e-09 9.977318294645585e-09 1.5707997173517319
+        children [
+          DEF wheelR Shape {
+            appearance Rubber {
+            }
+            geometry Cylinder {
+              height 0.01
+              radius 0.02
+            }
+          }
+        ]
+        name "wheelR"
+        boundingObject USE wheelR
+        physics DEF wheelPhysics Physics {
+        }
+      }
+    }
+  ]
+  name "Z33ker 3.0"
+  boundingObject USE body
+  physics Physics {
+  }
+  controller "newnew3"
+}
